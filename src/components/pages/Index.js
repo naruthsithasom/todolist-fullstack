@@ -3,5 +3,10 @@ import TodoList from '../TodoList/TodoList'
 
 export default function Index(){
   return(
-    <div>Todo list page</div>  )
+    <div> 
+      /components/pages/Index.js 
+      <hr/>
+      <TodoList />
+    </div> 
+  )
 }
