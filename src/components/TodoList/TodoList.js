@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { List, Input, Button, Row, Col, Divider, Typography } from 'antd';
 import _ from 'lodash'
 
