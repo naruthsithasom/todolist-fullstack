@@ -1,0 +1,2 @@
+sudo npm init react-app project01
+sudo npm install react-router-dom antd axios
