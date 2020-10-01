@@ -13,12 +13,19 @@ export default function TodoList() {
     const newTodoList = [...todoList]
       newTodoList.push({
         id: _.uniqueId,
-        task: inputField,
+        task: inputField
       })
-      setTodoList(newTodoList)
-      setInputField("")
+      setTodoList(newTodoList) //สร้างข้อมูล
+      setInputField("") //เตลียร์ช่อง input ให้ว่าง
   }
+  const deleteTodoItem = (id) => {
 
+      let newTodoList = [...todoList]
+      let targetIndex = newTodoList.findIndex( todo => todo.id === id)
+      newTodoList.splice(targetIndex, 1)
+      setTodoList(newTodoList)
+      
+  }
   return (
 
     // <div>
@@ -44,14 +51,14 @@ export default function TodoList() {
             header={<div> Todo List pages </div>}
             bordered
             dataSource={todoList}
-            renderItem={todo => (
+            renderItem={ todo => (
               <List.Item>
                 <Row style={{ width: '100%'}}>
-                  <Col span={20}>
+                  <Col span={20} align="left">
                     {todo.task}
                   </Col>
                   <Col span={4}>
-                    <Button type='danger'>DELETE</Button>
+                    <Button type='danger' onClick={ () =>  deleteTodoItem(todo.id) }> DELETE </Button>
                   </Col>
                 </Row>
               </List.Item>
