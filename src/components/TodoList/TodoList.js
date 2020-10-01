@@ -27,7 +27,7 @@ export default function TodoList() {
     <Row justify="center" >
       <Col>
         <Row style={{ justifyContent:'center'}}>
-          <Text type="danger">กรุณาใส่ Todo ที่ต้องการเพิ่ม</Text>
+          <Text type="success">กรุณาใส่ Todo ที่ต้องการเพิ่ม</Text>
         </Row>
         <Row justify="center">
           <Col span={ 20 }>
@@ -46,7 +46,14 @@ export default function TodoList() {
             dataSource={todoList}
             renderItem={todo => (
               <List.Item>
-                {todo.task}
+                <Row style={{ width: '100%'}}>
+                  <Col span={20}>
+                    {todo.task}
+                  </Col>
+                  <Col span={4}>
+                    <Button type='danger'>DELETE</Button>
+                  </Col>
+                </Row>
               </List.Item>
             )} />
         </Row>
