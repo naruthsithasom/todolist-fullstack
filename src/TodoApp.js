@@ -19,9 +19,9 @@ function TodoApp(){
         <Route exact patch='/profile' component={Profile}/> */}
 
         <Route  path='/todo-task'>
-          <TodoTask/>
+          <TodoTask />
         </Route>
-        <Redirect to='/' />
+        {/* <Redirect to='/' /> */}
 
       </Switch>
     </div>

@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { List, Row, Col, Divider, Button, Typography } from 'antd'
-import _ from 'lodash'
+// import _ from 'lodash'
 import axios from 'axios'
+import Todo  from './Todo'
 
 function TodoTask() {
 
@@ -9,7 +10,7 @@ function TodoTask() {
   const [todoTask, setTodoTask] = useState([])//todoTask=[]
   const [inputField, setInputField] = useState('')// inputField=''
 
-  const fetchTodoTask = async () => {
+  const fetchTodoTask = async () => { //ดึงข้อมูล Backend
     const res = await axios.get("http://localhost:8000/todo-list")
     setTodoTask(res.data) //ส่งtodoTask แสดงผล
   }
@@ -19,26 +20,30 @@ function TodoTask() {
   }, [])
 
   //Monk Data สร้างข้อมูลจำลอง
-  // useEffect(() => {
-  //   setTodoTask([
-  //     {
-  //       id: 1,
-  //       task: 'Do Homework'
-  //     },
-  //     {
-  //       id: 2,
-  //       task: 'Play game online',
-  //     },
-  //     {
-  //       id: 3,
-  //       task: 'Watch Youtube'
-  //     },
-  //     {
-  //       id: 4,
-  //       task: 'Do Someting'
-  //     },
-  //   ])
-  // }, [])
+  /*
+  useEffect(() => {
+    setTodoTask([
+      {
+        id: 1,
+        task: 'Do Homework'
+      },
+      {
+        id: 2,
+        task: 'Play game online',
+      },
+      {
+        id: 3,
+        task: 'Watch Youtube'
+      },
+      {
+        id: 4,
+        task: 'Do Someting'
+      },
+    ])
+  }, [])
+  */
+
+  /* 
   const addTodoItem = () => {
     const task = inputField
     const newTodoTask = [...todoTask]
@@ -50,10 +55,19 @@ function TodoTask() {
     setTodoTask(newTodoTask)//ส่งข้อความและแสดงผล
     setInputField('')//หลังจากกรอกข้อความต้องทำให้inputส่าง
   }
+  */
+  const addTodoItem = async () => {
+    await axios.post('http://localhost:8000/todo-list',{ task: inputField})
+    fetchTodoTask()
+  }
 
-  const deleteTodoItem = (id) => {
-    const newTodoTask = todoTask.filter( deleteId => deleteId.id !== id)
-    setTodoTask(newTodoTask)
+  // const deleteTodoItem = (id) => {
+  //   const newTodoTask = todoTask.filter( deleteId => deleteId.id !== id)
+  //   setTodoTask(newTodoTask)
+  // }
+  const deleteTodoItem = async (id) => {
+    await axios.delete(`http://localhost:8000/todo-list/${id}`)
+    fetchTodoTask()
   }
 
   return (
@@ -83,17 +97,7 @@ function TodoTask() {
         dataSource={todoTask}
         renderItem={item => (
           <List.Item>
-            <Row style={{width:'100%'}}>
-              <Col span={2}>
-                {item.id + '.'}
-              </Col>
-              <Col span={18} style={{ textAlign: 'left' }}>
-                {item.task}
-              </Col>
-              <Col span={4}>
-                <Button type="danger" onClick={() => deleteTodoItem(item.id)}>Delete</Button>
-              </Col>
-            </Row>
+            <Todo del={deleteTodoItem} items={item} fetchData={fetchTodoTask}/>
           </List.Item>
         )}
       />
