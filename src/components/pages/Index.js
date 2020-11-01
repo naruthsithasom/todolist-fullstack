@@ -1,7 +1,7 @@
 import React from 'react'
 import TodoList from '../TodoList/TodoList'
 
-export default function Index(){
+function Index(){
   return(
     <div> 
       /components/pages/Index.js 
@@ -10,3 +10,4 @@ export default function Index(){
     </div> 
   )
 }
+export default Index
