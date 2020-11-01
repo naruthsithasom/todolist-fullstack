@@ -11,35 +11,42 @@ export default function Todo(props) {
     props.fetchData()
     setIsEdit(false)
   }
+  const toggleEdite = () => {
+    setChangeInput(props.items.task)
+    setIsEdit(true)
+  }
+  let content = (
+    <Row style={{ width: '100%' }}>
+      <Col span={20}>
+        <Input value={changeInput} onChange={(e) => setChangeInput(e.target.value)} />
+      </Col>
+      <Col span={4}>
+        <Button type="primary" onClick={() => updateTodoItem(props.items.id)}>Done</Button>
+      </Col>
+    </Row>
+  )
+    if (!isEdit) {
+      content = (
+        <Row style={{ width: '100%' }}>
+          <Col span={2}>
+            {props.items.id + '.'}
+          </Col>
+          <Col span={14} style={{ textAlign: 'left' }}>
+            {props.items.task}
+          </Col>
+          <Col span={4}>
+            <Button style={{ backgroundColor: 'orange' }} onClick={() => toggleEdite()}>Edit</Button>
+          </Col>
+          <Col span={4}>
+            <Button type="danger" onClick={() => props.del(props.items.id)}>Delete</Button>
+          </Col>
+        </Row>
+      )
+    }
+
   return (
     <div style={{ width: '100%' }}>
-      {(isEdit) ?
-        (
-          <Row style={{ width: '100%' }}>
-            <Col span={20}>
-              <Input value={changeInput} onChange={(e) => setChangeInput(e.target.value)} />
-            </Col>
-            <Col span={2}>
-              <Button type="primary" onClick={() => updateTodoItem(props.items.id)}>Done</Button>
-            </Col>
-          </Row>
-        ) : (
-          <Row style={{ width: '100%' }}>
-            <Col span={2}>
-              {props.items.id + '.'}
-            </Col>
-            <Col span={14} style={{ textAlign: 'left' }}>
-              {props.items.task}
-            </Col>
-            <Col span={4}>
-              <Button style={{backgroundColor:'orange'}} onClick={() => setIsEdit(true)}>Edit</Button>
-            </Col>
-            <Col span={4}>
-              <Button type="danger" onClick={() => props.del(props.items.id)}>Delete</Button>
-            </Col>
-          </Row>
-        )
-      }
-    </div>
+      {content}
+    </div >
   )
 }

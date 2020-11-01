@@ -72,7 +72,6 @@ function TodoTask() {
 
   return (
     <div style={{ width: '500px', margin: 'auto' }}>
-
       {/* {todoTask.map((item) => {
         return (
           <div key={item.id}> {item.task} </div>
