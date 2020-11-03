@@ -59,6 +59,7 @@ function TodoTask() {
   const addTodoItem = async () => {
     await axios.post('http://localhost:8000/todo-list',{ task: inputField})
     fetchTodoTask()
+    setInputField('')
   }
 
   // const deleteTodoItem = (id) => {
@@ -96,7 +97,8 @@ function TodoTask() {
         dataSource={todoTask}
         renderItem={item => (
           <List.Item>
-            <Todo del={deleteTodoItem} items={item} fetchData={fetchTodoTask}/>
+            {/* ส่งแบบ props */}
+            <Todo del={deleteTodoItem} items={item} fetchData={fetchTodoTask}/> 
           </List.Item>
         )}
       />
