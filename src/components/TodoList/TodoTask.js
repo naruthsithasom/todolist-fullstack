@@ -11,7 +11,7 @@ function TodoTask() {
   const [inputField, setInputField] = useState('')// inputField=''
 
   const fetchTodoTask = async () => { //ดึงข้อมูล Backend
-    const res = await axios.get("http://localhost:8000/todo-list")
+    const res = await axios.get("http://localhost:8000/todo-list") //connect backend
     setTodoTask(res.data) //ส่งtodoTask แสดงผล
   }
 
@@ -67,7 +67,7 @@ function TodoTask() {
   //   setTodoTask(newTodoTask)
   // }
   const deleteTodoItem = async (id) => {
-    await axios.delete(`http://localhost:8000/todo-list/${id}`)
+    await axios.delete(`http://localhost:8000/todo-list/${id}`) // connect backend
     fetchTodoTask()
   }
 
